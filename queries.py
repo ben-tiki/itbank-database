@@ -36,8 +36,8 @@ def get_html_table(query) -> str:
                 <input id = "button" type="submit" value="Enviar">\n    
                 </form>\n    
                 <div id=\'mostrar_datos\'>\n
-                </div>\n
                 {table}\n
+                </div>\n
                 </body>\n
                 </html>
 

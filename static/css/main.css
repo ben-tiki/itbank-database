@@ -26,7 +26,7 @@ h1 { color: #fff;
     padding: 15px 25px;
     background: linear-gradient(
       270.01deg,
-      rgba(174, 166, 255, 0.85963) 8.27%,
+      #b0a8ffdb 8.27%,
       #f2e1ff 45.42%,
       rgba(255, 249, 219, 0) 82.18%
     );
@@ -81,12 +81,48 @@ input{
 }
 
 #registro_transacciones{
-
     flex: 1;
     margin-right: 200px;
-
 }
 
+#mostrar_datos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#query_table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: left;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+th{ text-align: center;}
 
 
+th, td{
+    padding: 15px;
+    border: thin solid rgba(0, 0, 0, 0.589);
+}
 
+thead {
+    background-color: #b0a8ffdb ;
+    color: #ffffff;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.795);
+    text-transform: uppercase;
+}
+
+tbody tr {
+    border-bottom: thin solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
