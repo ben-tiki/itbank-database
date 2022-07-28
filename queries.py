@@ -38,7 +38,10 @@ def get_html_table(query) -> str:
                 <div id=\'mostrar_datos\'>\n
                 {table}\n
                 </div>\n
-                </body>\n
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>\n
+                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>\n
+                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">\n
+                <script src="../static/js/pagination.js"></script>\n
                 </html>
 
             """
