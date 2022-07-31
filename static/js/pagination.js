@@ -6,7 +6,7 @@ $(document).ready(function() {
         "pageLength": 25,
         "lengthChange": false,
         "searching": false,
-        "ordering": true,
+        "ordering": false,
         "info": true,
         "autoWidth": false
     });

@@ -34,7 +34,8 @@ def get_html_table(query) -> str:
                 <label for="">Inserte su query de SQL</label>\n        
                 <input type="text" name="tipo_operacion">\n        
                 <input id = "button" type="submit" value="Enviar">\n    
-                </form>\n    
+                </form>\n 
+                <h1>{query}</h1>\n    
                 <div id=\'mostrar_datos\'>\n
                 {table}\n
                 </div>\n

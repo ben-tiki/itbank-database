@@ -1,24 +1,96 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='/static/css/main.css' />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/main.css" />
     <title>Document</title>
-</head>
-<body>  
+  </head>
+  <body>
     <div class="header">
-        <h1 id = "registro_transacciones">SQL Table viewer</h1> 
-        <img src="../static/images/itbank_logo.png" alt="logo"> 
+      <h1 id="registro_transacciones">SQL Table viewer</h1>
+      <img src="../static/images/itbank_logo.png" alt="logo" />
     </div>
     <form method="POST" id="form">
-        <label for="">Inserte su query de SQL</label>
-        <input type="text" name="sql_query">
-        <input id = "button" type="submit" value="Enviar">
-    </form>
+      <select name="sql_query">
+        <option value="" disabled selected>Selecciona</option>
+        <option value="SELECT * FROM cliente">Clientes</option>
+        <option value="SELECT * FROM tipo_usuarios">Tipo Usuarios</option>
 
-    <div id='mostrar_datos'>
-        
-    </div>
-</body>
+        <option value="SELECT * FROM clientes_view">Clients View</option>
+        <option value="SELECT * FROM clientes_view order by DNI asc">
+          Clients View order DNI
+        </option>
+        <option
+          value="SELECT * FROM clientes_view WHERE Nombre = 'Anne' OR Nombre = 'Tyler'"
+        >
+          Clients View Anne And Tyler
+        </option>
+        <option value="insertValue">Insertar 5 registros nuevos a la tablar, Paso 1</option>
+        <option value="UPDATE cliente set branch_id = '10' WHERE customer_id >500">Actualizar branch_id a 10,  paso 2</option>
+        <option value="DELETE from cliente WHERE customer_name = 'Noel' and customer_surname = 'David'">Borrar a Noel David, Paso 3</option>
+        <option value="SELECT * FROM cliente where customer_id > 500">Mostrar los ultimos 5 registros, Paso 4</option>
+        <option value="SELECT max(loan_total) as Mayor_Importe FROM prestamo">
+          Mayor Prestamo
+        </option>
+        <option value="SELECT * FROM cuenta WHERE balance < 0">
+          Balance negativo
+        </option>
+
+        <option
+          value="SELECT customer_name, customer_surname, strftime('%Y','now') - strftime('%Y',dob) as Edad FROM cliente WHERE customer_surname like '%z%'"
+        >
+          Apellido con Z
+        </option>
+        <option
+          value="SELECT c.customer_name as Nombre,c.customer_surname as Apellido, strftime('%Y','now') - strftime('%Y',c.dob) as Edad, s.branch_name as Nombre_sucursal FROM cliente c LEFT JOIN sucursal s on  c.branch_id = s.branch_id WHERE c.customer_name = 'Brendan' ORDER by s.branch_name ASC"
+        >
+          Sucursal Brendan
+        </option>
+
+        <option
+          value="SELECT loan_type, loan_total FROM prestamo WHERE loan_type = 'PRENDARIO' OR loan_total > '8000000'"
+        >
+          Prestamos y Prendarios Mayor a 80000,00
+        </option>
+        <option
+          value="SELECT * FROM prestamo WHERE loan_total > (SELECT AVG(loan_total) FROM prestamo)"
+        >
+          Prestamos Mayor al Promedio
+        </option>
+        <option
+          value="SELECT count(*) as Menores_50 FROM cliente WHERE strftime('%Y','now') - strftime('%Y',dob)<50; "
+        >
+          Cantidad de clientes menores a 50
+        </option>
+        <option value="SELECT * FROM cuenta WHERE balance > 8000 LIMIT 5">
+          Primeros 5 con saldo Mayor a 8000
+        </option>
+        <option
+          value="SELECT *  FROM prestamo WHERE strftime('%m',loan_date) = '04' or strftime('%m',loan_date) = '06' or strftime('%m',loan_date) = '08' ORDER by loan_total ASC"
+        >
+          Prestamos Abril, Junio, Agosto
+        </option>
+        <option
+          value="SELECT  loan_type, sum(loan_total) as loan_total_accu FROM prestamo group by loan_type"
+        >
+          Suma Total de cada prestamo
+        </option>
+        <option
+          value="SELECT s.branch_name, count(c.branch_id) as Cantidad_de_clientes FROM sucursal s LEFT JOIN cliente c on s.branch_id = c.branch_id GROUP by s.branch_name ORDER By Cantidad_de_clientes DESC"
+        >
+          Cantidad de clientes por sucursal
+        </option>
+        <option value="SELECT s.branch_name, count(*) as Tarjetas FROM tipo_usuarios tp LEFT JOIN cliente c ON tp.customer_id = c.customer_id LEFT JOIN sucursal s ON c.branch_id = s.branch_id where tp.card_type = 'CREDIT' GROUP by s.branch_name">Tarjetas de Credito por sucursal</option>
+        <option
+          value="SELECT s.branch_name,round(avg(p.loan_total),0) FROM prestamo p LEFT JOIN cliente c ON p.customer_id = c.customer_id LEFT JOIN sucursal s ON c.branch_id = s.branch_id GROUP by s.branch_name"
+        >
+          Promedio de Creditos por sucursal
+        </option>
+        <option value="">Clients View</option>
+      </select>
+      <input id="button" type="submit" value="Enviar" />
+    </form>
+    <div id="mostrar_datos"></div>
+  </body>
 </html>
