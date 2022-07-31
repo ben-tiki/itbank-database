@@ -18,11 +18,12 @@ def index():
         # se genera la tabla de html con el input del usuario
         tipo_operacion = str(flask.request.form['sql_query'])
 
+
         # se genera el archivo en base al query
-        get_html_table(tipo_operacion)
+        table_data = get_html_table(tipo_operacion)
 
         # returns the html template
-        return flask.render_template('reporte.html')
+        return flask.render_template('index.html', table_data=table_data, tipo_operacion=tipo_operacion)
 
 
     return flask.render_template('index.html')

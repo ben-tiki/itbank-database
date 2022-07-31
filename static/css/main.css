@@ -95,6 +95,10 @@ input{
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+	/* padding-left: 30px; */
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -130,3 +134,28 @@ tbody tr:nth-of-type(even) {
 .dataTables_wrapper {
     font-family: tahoma;
 }
+
+#query_table_info {
+	margin-left: 10%;
+	font-family: tahoma;
+}
+
+#query_table_paginate {
+	margin-right: 10%;
+	font-family: tahoma;
+}
+#query_table_previous{
+	font-family: tahoma;
+}
+
+#query_table_next{
+	font-family: tahoma;
+}
+
+#selected_query {
+    font-family: Tahoma, sans-serif;
+    font-weight: bold; 
+    letter-spacing: 0.5px; 
+    line-height: 1; 
+    text-align: center;
+     }

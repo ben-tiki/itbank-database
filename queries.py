@@ -11,44 +11,9 @@ def get_html_table(query) -> str:
 
     # se ejecuta la consulta
     base_de_datos = pd.read_sql_query(query, con)
+    
     # se convierte la base de datos a html
     table = base_de_datos.to_html(table_id = "query_table", index=False)
 
-    # el template el cual contendra la tabla
-    html_template = f"""
-
-                <html lang="en">\n
-                <head>\n    
-                <meta charset="UTF-8">\n    
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">\n    
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    
-                <link rel="stylesheet" href=\'/static/css/main.css\' />\n    
-                <title>Document</title>\n
-                </head>\n
-                <body>\n    
-                <div class="header">\n        
-                <h1 id = "registro_transacciones">SQL Table viewer</h1>\n        
-                <img src="../static/images/itbank_logo.png" alt="logo">\n    
-                </div>\n    
-                <form method="POST" id="form">\n        
-                <label for="">Inserte su query de SQL</label>\n        
-                <input type="text" name="tipo_operacion">\n        
-                <input id = "button" type="submit" value="Enviar">\n    
-                </form>\n 
-                <h1>{query}</h1>\n    
-                <div id=\'mostrar_datos\'>\n
-                {table}\n
-                </div>\n
-                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>\n
-                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>\n
-                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">\n
-                <script src="../static/js/pagination.js"></script>\n
-                </html>
-
-            """
-
-
-    # se escribe el template en un archivo html, dentro de la carpeta templates
-    with open("templates/reporte.html", "w", encoding="utf-8") as f:
-
-        f.write(html_template)
+    # se deveuelve la tabla de html generada
+    return table

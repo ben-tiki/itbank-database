@@ -4,7 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/css/main.css" />
-    <title>Document</title>
+    <link rel="icon" href="/static/images/itbank_icon.png" sizes="35x35"/>
+    <title>SQL Table Viewer</title>
   </head>
   <body>
     <div class="header">
@@ -14,83 +15,37 @@
     <form method="POST" id="form">
       <select name="sql_query">
         <option value="" disabled selected>Selecciona</option>
-        <option value="SELECT * FROM cliente">Clientes</option>
-        <option value="SELECT * FROM tipo_usuarios">Tipo Usuarios</option>
-
-        <option value="SELECT * FROM clientes_view">Clients View</option>
-        <option value="SELECT * FROM clientes_view order by DNI asc">
-          Clients View order DNI
-        </option>
-        <option
-          value="SELECT * FROM clientes_view WHERE Nombre = 'Anne' OR Nombre = 'Tyler'"
-        >
-          Clients View Anne And Tyler
-        </option>
-        <option value="insertValue">Insertar 5 registros nuevos a la tablar, Paso 1</option>
-        <option value="UPDATE cliente set branch_id = '10' WHERE customer_id >500">Actualizar branch_id a 10,  paso 2</option>
-        <option value="DELETE from cliente WHERE customer_name = 'Noel' and customer_surname = 'David'">Borrar a Noel David, Paso 3</option>
-        <option value="SELECT * FROM cliente where customer_id > 500">Mostrar los ultimos 5 registros, Paso 4</option>
-        <option value="SELECT max(loan_total) as Mayor_Importe FROM prestamo">
-          Mayor Prestamo
-        </option>
-        <option value="SELECT * FROM cuenta WHERE balance < 0">
-          Balance negativo
-        </option>
-
-        <option
-          value="SELECT customer_name, customer_surname, strftime('%Y','now') - strftime('%Y',dob) as Edad FROM cliente WHERE customer_surname like '%z%'"
-        >
-          Apellido con Z
-        </option>
-        <option
-          value="SELECT c.customer_name as Nombre,c.customer_surname as Apellido, strftime('%Y','now') - strftime('%Y',c.dob) as Edad, s.branch_name as Nombre_sucursal FROM cliente c LEFT JOIN sucursal s on  c.branch_id = s.branch_id WHERE c.customer_name = 'Brendan' ORDER by s.branch_name ASC"
-        >
-          Sucursal Brendan
-        </option>
-
-        <option
-          value="SELECT loan_type, loan_total FROM prestamo WHERE loan_type = 'PRENDARIO' OR loan_total > '8000000'"
-        >
-          Prestamos y Prendarios Mayor a 80000,00
-        </option>
-        <option
-          value="SELECT * FROM prestamo WHERE loan_total > (SELECT AVG(loan_total) FROM prestamo)"
-        >
-          Prestamos Mayor al Promedio
-        </option>
-        <option
-          value="SELECT count(*) as Menores_50 FROM cliente WHERE strftime('%Y','now') - strftime('%Y',dob)<50; "
-        >
-          Cantidad de clientes menores a 50
-        </option>
-        <option value="SELECT * FROM cuenta WHERE balance > 8000 LIMIT 5">
-          Primeros 5 con saldo Mayor a 8000
-        </option>
-        <option
-          value="SELECT *  FROM prestamo WHERE strftime('%m',loan_date) = '04' or strftime('%m',loan_date) = '06' or strftime('%m',loan_date) = '08' ORDER by loan_total ASC"
-        >
-          Prestamos Abril, Junio, Agosto
-        </option>
-        <option
-          value="SELECT  loan_type, sum(loan_total) as loan_total_accu FROM prestamo group by loan_type"
-        >
-          Suma Total de cada prestamo
-        </option>
-        <option
-          value="SELECT s.branch_name, count(c.branch_id) as Cantidad_de_clientes FROM sucursal s LEFT JOIN cliente c on s.branch_id = c.branch_id GROUP by s.branch_name ORDER By Cantidad_de_clientes DESC"
-        >
-          Cantidad de clientes por sucursal
-        </option>
-        <option value="SELECT s.branch_name, count(*) as Tarjetas FROM tipo_usuarios tp LEFT JOIN cliente c ON tp.customer_id = c.customer_id LEFT JOIN sucursal s ON c.branch_id = s.branch_id where tp.card_type = 'CREDIT' GROUP by s.branch_name">Tarjetas de Credito por sucursal</option>
-        <option
-          value="SELECT s.branch_name,round(avg(p.loan_total),0) FROM prestamo p LEFT JOIN cliente c ON p.customer_id = c.customer_id LEFT JOIN sucursal s ON c.branch_id = s.branch_id GROUP by s.branch_name"
-        >
-          Promedio de Creditos por sucursal
-        </option>
-        <option value="">Clients View</option>
-      </select>
+        <option value="SELECT * FROM cliente">Tabla de clientes completa</option>
+        <option value="SELECT * FROM tipo_usuarios">Tipo  de tipo de usuarios completa</option>
+        <option value="SELECT * FROM clientes_view">Tabla de clientes completa</option>
+        <option value="SELECT * FROM clientes_view order by DNI asc">Vista de tabla clientes ordenada por DNI</option>
+        <option value="SELECT * FROM clientes_view WHERE Nombre = 'Anne' OR Nombre = 'Tyler'">Clientes llamados "Anne" o "Tyler"</option>
+        <option value="SELECT max(loan_total) as Mayor_Importe FROM prestamo">Mayor Prestamo de tabla préstamos</option>
+        <option value="SELECT * FROM cuenta WHERE balance < 0">Cuentas con balance negativo en tabla cuentas</option>
+        <option value="SELECT customer_name, customer_surname, strftime('%Y','now') - strftime('%Y',dob) as Edad FROM cliente WHERE customer_surname like '%z%'">Apellidos que contengan la letra "z" en tabla clientes</option>
+        <option value="SELECT c.customer_name as Nombre,c.customer_surname as Apellido, strftime('%Y','now') - strftime('%Y',c.dob) as Edad, s.branch_name as Nombre_sucursal FROM cliente c LEFT JOIN sucursal s on  c.branch_id = s.branch_id WHERE c.customer_name = 'Brendan' ORDER by s.branch_name ASC">Toda la información de clientes llamados "Brendan"</option>
+        <option value="SELECT loan_type, loan_total FROM prestamo WHERE loan_type = 'PRENDARIO' OR loan_total > '8000000'">Préstamos Mayores a 80000 y todos los Prendarios</option>
+        <option value="SELECT * FROM prestamo WHERE loan_total > (SELECT AVG(loan_total) FROM prestamo)">Prestamos Mayor al Promedio </option>
+        <option value="SELECT count(*) as Menores_50 FROM cliente WHERE strftime('%Y','now') - strftime('%Y',dob)<50; ">Cantidad de clientes menores a 50 años de edad</option> 
+        <option value="SELECT * FROM cuenta WHERE balance > 8000 LIMIT 5"> Primeros 5 cuentas con saldo mayor a 8000 </option>
+        <option value="SELECT *  FROM prestamo WHERE strftime('%m',loan_date) = '04' or strftime('%m',loan_date) = '06' or strftime('%m',loan_date) = '08' ORDER by loan_total ASC"> Prestamos de Abril, Junio y Agosto </option>
+        <option value="SELECT  loan_type, sum(loan_total) as loan_total_accu FROM prestamo group by loan_type"> Suma Total de cada tipo de prestamo </option>
+        <option value="SELECT s.branch_name, count(c.branch_id) as Cantidad_de_clientes FROM sucursal s LEFT JOIN cliente c on s.branch_id = c.branch_id GROUP by s.branch_name ORDER By Cantidad_de_clientes DESC" > Cantidad de clientes por sucursal </option>
+        <option value="SELECT s.branch_name, count(*) as Tarjetas FROM tipo_usuarios tp LEFT JOIN cliente c ON tp.customer_id = c.customer_id LEFT JOIN sucursal s ON c.branch_id = s.branch_id where tp.card_type = 'CREDIT' GROUP by s.branch_name">Cantidad de tarjetas de crédito por sucursal</option>
+        <option value="SELECT s.branch_name,round(avg(p.loan_total),0) FROM prestamo p LEFT JOIN cliente c ON p.customer_id = c.customer_id LEFT JOIN sucursal s ON c.branch_id = s.branch_id GROUP by s.branch_name">  Promedio de creditos por sucursal</option>
+       </select>
       <input id="button" type="submit" value="Enviar" />
     </form>
     <div id="mostrar_datos"></div>
+
+    <div id="selected_query"> {{ tipo_operacion | safe }} </div>
+
+    {{ table_data | safe }}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="../static/js/pagination.js"></script>
+
   </body>
 </html>
