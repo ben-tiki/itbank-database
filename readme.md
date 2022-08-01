@@ -57,3 +57,22 @@ SELECT s.branch_name, count(*) as Tarjetas FROM tipo_usuarios tp LEFT JOIN clien
  
 
 SELECT s.branch_name,avg(p.loan_total) FROM prestamo p LEFT JOIN cliente c ON p.customer_id = c.customer_id LEFT JOIN sucursal s ON c.branch_id = s.branch_id GROUP by s.branch_name 
+
+
+CREATE TABLE "auditoria_cuenta" (
+	"old_id"	NUMERIC,
+	"new_id"	NUMERIC,
+	"old_balance"	NUMERIC,
+	"new_balance"	NUMERIC,
+	"old_iban"	TEXT,
+	"new_iban"	TEXT,
+	"user_action"	TEXT,
+	"created_at"	TEXT
+);
+
+
+CREATE TRIGGER customer_update_trigger AFTER UPDATE ON cuenta
+BEGIN
+    INSERT INTO auditoria_cuenta (old_id, new_id, old_balance, new_balance, old_iban, new_iban, user_action, created_at)
+    VALUES (OLD.customer_id, NEW.customer_id, OLD.balance, NEW.balance, OLD.iban, NEW.iban, CASE WHEN OLD.customer_id <> NEW.customer_id THEN 'CUSTOMER_UPDATED' ELSE CASE WHEN OLD.balance <> NEW.balance THEN 'AMOUNT_UPDATED' ELSE CASE WHEN OLD.iban <> NEW.iban THEN 'IBAN_UPDATED' END END END, datetime('now'));
+END;
